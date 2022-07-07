@@ -8,7 +8,7 @@ commands:
     steps:
       - run: |
           echo << parameters.id >>
-          return 1
+          exit 1
 
 jobs:
   print_workflow_id:
