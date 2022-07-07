@@ -2,17 +2,20 @@ version: 2.1
 
 commands: 
   print_pipeline_id:
+    parameters:
+      id:
+        type: string
     steps:
-      - run: echo $CIRCLE_WORKFLOW_ID
+      - run: echo << parameters.id >>
 
 jobs:
   print_workflow_id:
     docker:
       - image: cimg/base:stable
     steps:
-      - print_pipeline_id
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+      - print_pipeline_id:
+          id: << CIRCLE_WORKFLOW_ID >>
+
 workflows:
   echo-workflow-id:
     jobs:
